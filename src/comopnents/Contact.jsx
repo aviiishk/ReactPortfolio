@@ -34,9 +34,6 @@ export default function Contact() {
     } else {
       console.warn("EMAIL_JS_PUBLIC_KEY is missing!");
     }
-    console.log("EMAIL_JS_SERVICE_ID:", EMAIL_JS_SERVICE_ID);
-    console.log("EMAIL_JS_TEMPLATE_ID:", EMAIL_JS_TEMPLATE_ID);
-    console.log("EMAIL_JS_PUBLIC_KEY:", EMAIL_JS_PUBLIC_KEY);
   }, []);
 
   const validate = () => {
