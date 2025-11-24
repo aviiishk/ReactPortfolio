@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+
+/* ---------- design tokens & font (drop at top of src/index.css) ---------- */
+/* Google font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+:root {
+  --glass-bg: rgba(12, 14, 22, 0.55);
+  --glass-inner: rgba(12, 14, 22, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.05);
+
+  --accent-from: #7feafb; /* cyan */
+  --accent-mid: #9e7fe8; /* violet */
+  --accent-to: #e488aa; /* pink */
+}
+
+
+
+
+
+/* base font + app background (dark) */
+html,
+body,
+#root {
+  height: 100%;
+  cursor: none !important;
+
+}
+
+/* Gradient spotlight cursor */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  /* Smooth gradient — YOU CAN TUNE COLORS HERE */
+  background: radial-gradient(
+    circle at center,
+    rgba(120, 180, 255, 1) 0%,
+    rgba(90, 140, 255, 1) 40%,
+    rgba(60, 110, 255, 1) 100%
+  );
+
+  /* The magic that creates the highlight effect */
+  mix-blend-mode: difference;
+
+  transition: transform 0.12s ease, width 0.15s ease, height 0.15s ease;
+}
+
+/* Hover enlarge (subtle, classy) */
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor,
+.nav-link:hover ~ .custom-cursor {
+  width: 36px;
+  height: 36px;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: #07080b; /* near black so glass reads correctly */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* nav-link helper (used in component) */
+.nav-link {
+  letter-spacing: 0.12em;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+
+
+/* Tailwind arbitrary animation shim classes (referenced in earlier code optionally) */
+.animate-\[float_6s_ease-in-out_infinite\] {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-\[float_7s_ease-in-out_infinite\] {
+  animation: float 7s ease-in-out infinite;
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[float_6s_ease-in-out_infinite\],
+  .animate-\[float_7s_ease-in-out_infinite\],
+  .header-blobs .blob {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Gradient underline + hover gradient text (updated) ---------- */
+.gradient-underline {
+  position: relative;
+  display: inline-block;
+  color: #d1d5db; /* default slate-300 */
+
+  /* hover grow */
+  transform: scale(1);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.gradient-underline:hover {
+  /* Use transparent text + background-clip to apply gradient */
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    var(--accent-from),
+    var(--accent-mid),
+    var(--accent-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* grow on hover */
+  transform: scale(1.05);
+}
+
+/* Underline element */
+.gradient-underline::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 8px; /* gap between text and underline */
+  background: linear-gradient(
+    90deg,
+    var(--accent-from),
+    var(--accent-mid),
+    var(--accent-to)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease; /* same speed as color transition */
+  border-radius: 2px;
+}
+
+/* Underline expands on hover */
+.gradient-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Resume pill: blurred gradient stroke + dark inner pill ---------- */
+/* Put this near other button or token styles in src/index.css */
+
+.resume-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;                /* inner padding lives on .resume-inner */
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 180ms ease;
+  /* ensure it sits above subtle background lighting */
+  z-index: 2;
+}
+
+/* The colorful blurred stroke behind the pill */
+.resume-btn::before {
+  content: "";
+  position: absolute;
+  inset: -3px; /* a small halo outside the inner pill */
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-from),
+    var(--accent-mid),
+    var(--accent-to)
+  );
+  filter: blur(8px);
+  opacity: 0.36;            /* tweak for subtlety */
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+
+/* Inner pill that contains the text */
+.resume-inner {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 1.05rem; /* control pill height and horizontal padding */
+  border-radius: 999px;
+  background: rgba(8,10,15,0.56); /* dark glass */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+/* Hover / focus states */
+.resume-btn:hover,
+.resume-btn:focus {
+  transform: scaleX(1.05);
+  outline: none;
+}
+.resume-btn:focus-visible { /* keyboard focus */
+  box-shadow: 0 0 0 4px rgba(170, 143, 232, 0.12);
+  border-radius: 999px;
+}
+
+/* Hover: make glow slightly stronger and text a touch brighter */
+.resume-btn:hover::before { opacity: 0.5; filter: blur(6px); }
+.resume-btn:hover .resume-text { transform: scaleX(-1px); color: #ffffff; }
+
+/* Small-screen adjustments (optional) */
+@media (max-width: 640px) {
+  .resume-inner { padding: 0.36rem 0.9rem; }
+  .resume-text { font-size: 0.85rem; }
+}
+
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
