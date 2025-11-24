@@ -230,3 +230,15 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+/* Hide custom cursor + restore system cursor on touch devices */
+@media (pointer: coarse) {
+  #root,
+  html,
+  body {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+}
