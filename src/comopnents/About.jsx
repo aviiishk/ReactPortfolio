@@ -65,9 +65,9 @@ export default function About() {
       >
         <div className="w-[350px] h-[420px] md:w-[420px] md:h-[500px] bg-blue-200 rounded-3xl relative overflow-hidden shadow-xl">
           <img
-            src="/me.png"
+            src="/me.jpg"
             alt="Profile"
-            className="absolute bottom-0 w-full object-cover"
+            className="absolute bottom-0 w-full h-full object-cover"
           />
         </div>
       </motion.div>
