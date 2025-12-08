@@ -127,13 +127,13 @@ export default function Contact() {
             <ContactMethod
               icon={<Mail size={18} />}
               label="Email"
-              value="youremail@example.com"
-              onCopy={() => copyEmail("youremail@example.com")}
+              value="abhishekkumarprasad03@gmail.com"
+              onCopy={() => copyEmail("abhishekkumarprasad03@gmail.com")}
             />
             <ContactMethod
               icon={<Phone size={18} />}
               label="Phone"
-              value="(+91) 12345 67890"
+              value="(+91) 69016 15371"
             />
             <ContactMethod
               icon={<MapPin size={18} />}
