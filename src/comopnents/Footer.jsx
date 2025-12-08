@@ -78,6 +78,8 @@ export default function Footer() {
             {/* Mail */}
             <a
               href={`mailto:${SOCIALS.email}`}
+              target="_blank"
+              rel="noreferrer noopener"
               aria-label="Send email"
               className="hover:text-white transition-colors"
             >
