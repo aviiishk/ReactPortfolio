@@ -144,6 +144,8 @@ export default function Contact() {
 
           <div className="mt-5 flex items-center gap-3">
             <a
+              target="_blank"
+              rel="noreferrer noopener"
               href="mailto:abhishekkumarprasad03@gmail.com"
               className="ml-auto inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-transform duration-200 hover:scale-105"
               style={{
